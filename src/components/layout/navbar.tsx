@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
 import { ROUTES } from '@/lib/constants';
 import { NavbarClient } from './navbar-client';
-import { getUser } from '@/features/auth/actions';
+import { createClient } from '@/lib/supabase/server';
 
 const navLinks = [
   { href: ROUTES.BROWSE, label: 'Browse All' },
@@ -12,7 +11,15 @@ const navLinks = [
 ];
 
 export default async function Navbar() {
-  const user = await getUser();
+  let user = null;
+  
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getUser();
+    user = data.user;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+  }
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -20,8 +27,12 @@ export default async function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href={ROUTES.HOME} className="flex items-center gap-2 group">
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary-mint to-primary-emerald overflow-hidden group-hover:scale-105 transition-transform duration-200">
-              <span className="text-2xl font-bold text-white">W</span>
+            <div className="relative w-10 h-10 rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-200">
+              <img
+                src="/weswap-icon.jpeg"
+                alt="We-Swap"
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             <span className="text-xl font-bold text-foreground hidden sm:inline-block">

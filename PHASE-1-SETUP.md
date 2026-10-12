@@ -136,7 +136,7 @@ src/
 ```tsx
 // Using Tailwind classes
 <div className="bg-mint text-white">
-<button className="bg-emerald hover:bg-mint">
+<button className="bg-emerald hover:bg-mint cursor-pointer">
 
 // Using HSL variables
 <div className="bg-primary text-primary-foreground">

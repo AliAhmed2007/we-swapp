@@ -18,10 +18,15 @@ export const metadata: Metadata = {
   description: "Hyper-localized student exchange platform. Reuse • Exchange • Connect. Zero AI, zero shipping, zero waste.",
   keywords: ["campus marketplace", "student exchange", "reuse", "sustainability", "peer-to-peer"],
   authors: [{ name: "We-Swap Team" }],
+  icons: {
+    icon: '/weswap-icon.jpeg',
+    apple: '/weswap-icon.jpeg',
+  },
   openGraph: {
     title: "We-Swap | Campus Exchange Platform",
     description: "Reuse • Exchange • Connect",
     type: "website",
+    images: ['/weswap-icon.jpeg'],
   },
 };
 

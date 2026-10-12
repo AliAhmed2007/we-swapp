@@ -83,7 +83,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 ```tsx
 // Primary brand colors
 <div className="bg-mint text-white">
-<button className="bg-emerald hover:bg-mint">
+<button className="cursor-pointer bg-emerald hover:bg-mint">
 
 // Dark mode aware
 <div className="bg-background text-foreground">
