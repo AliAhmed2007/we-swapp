@@ -1,4 +1,8 @@
+"use client";
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { cardHoverProps } from '@/lib/animations';
 import type { Database } from '@/types/database.types';
 
 type Listing = Database['public']['Tables']['listings']['Row'] & {
@@ -17,16 +21,16 @@ interface ListingCardProps {
 }
 
 const CONDITION_COLORS = {
-  NEW: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
-  LIKE_NEW: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-  GOOD: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
-  USED: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400',
+  NEW: 'bg-success/15 text-success border border-success/30',
+  LIKE_NEW: 'bg-info/15 text-info border border-info/30',
+  GOOD: 'bg-warning/15 text-warning-foreground border border-warning/30',
+  USED: 'bg-muted text-muted-foreground border border-border',
 };
 
 const TYPE_BADGES = {
-  SELL: { label: 'For Sale', color: 'bg-primary text-primary-foreground' },
-  DONATE: { label: 'Free', color: 'bg-green-500 text-white' },
-  SWAP: { label: 'Swap', color: 'bg-blue-500 text-white' },
+  SELL: { label: 'For Sale', color: 'bg-primary text-primary-foreground shadow-sm' },
+  DONATE: { label: 'Free', color: 'bg-success text-success-foreground shadow-sm' },
+  SWAP: { label: 'Swap', color: 'bg-info text-info-foreground shadow-sm' },
 };
 
 export function ListingCard({ listing }: ListingCardProps) {
@@ -36,13 +40,18 @@ export function ListingCard({ listing }: ListingCardProps) {
 
   return (
     <Link href={`/listings/${listing.id}`}>
-      <div className="group relative bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+      <motion.div 
+        className="group relative bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200"
+        {...cardHoverProps}
+      >
         {/* Image */}
         <div className="relative aspect-square overflow-hidden bg-muted">
-          <img
+          <motion.img
             src={coverImage}
             alt={listing.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
           />
           
           {/* Type Badge */}
@@ -51,7 +60,7 @@ export function ListingCard({ listing }: ListingCardProps) {
           </div>
 
           {/* Condition Badge */}
-          <div className={`absolute top-3 right-3 px-2 py-1 rounded text-xs font-medium ${conditionColor}`}>
+          <div className={`absolute top-3 right-3 px-2 py-1 rounded-md text-xs font-medium ${conditionColor}`}>
             {listing.condition.replace('_', ' ')}
           </div>
         </div>
@@ -81,7 +90,7 @@ export function ListingCard({ listing }: ListingCardProps) {
               </div>
             )}
             {listing.listing_type === 'DONATE' && (
-              <div className="text-xl font-semibold text-green-600">
+              <div className="text-xl font-semibold text-success">
                 Free
               </div>
             )}
@@ -102,7 +111,7 @@ export function ListingCard({ listing }: ListingCardProps) {
             <span className="truncate">{listing.campus_spot}</span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 }

@@ -2,18 +2,20 @@
 
 @layer base {
   :root {
-    /* Light Mode */
+    /* Light Mode - Clean & Clear */
     --background: 210 20% 98%;
     --foreground: 222 47% 11%;
     
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     
+    /* Popups - Clear white with subtle shadow */
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
     
+    /* Primary - We-Swap Mint */
     --primary: 160 92% 45%;
-    --primary-foreground: 0 0% 100%;
+    --primary-foreground: 222 47% 11%;
     
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
@@ -21,11 +23,25 @@
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
     
+    /* Accent - Deep Emerald */
     --accent: 160 100% 31%;
     --accent-foreground: 0 0% 100%;
     
+    /* Destructive/Warning - Bright for visibility */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
+    
+    /* Warning - Amber for caution */
+    --warning: 38 92% 50%;
+    --warning-foreground: 222 47% 11%;
+    
+    /* Success - Emerald tint */
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
+    
+    /* Info - Blue for informational */
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
     
     --border: 214 32% 91%;
     --input: 214 32% 91%;
@@ -76,6 +92,56 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  /* Badge Variants - Clear and readable */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors;
+  }
+  
+  .badge-primary {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  .badge-success {
+    @apply bg-success text-success-foreground;
+  }
+  
+  .badge-warning {
+    @apply bg-warning text-warning-foreground;
+  }
+  
+  .badge-destructive {
+    @apply bg-destructive text-destructive-foreground;
+  }
+  
+  .badge-info {
+    @apply bg-info text-info-foreground;
+  }
+  
+  .badge-outline {
+    @apply border border-border bg-transparent text-foreground;
+  }
+  
+  /* Alert/Warning Box Styles */
+  .alert {
+    @apply relative w-full rounded-lg border p-4;
+  }
+  
+  .alert-warning {
+    @apply border-warning/50 bg-warning/10 text-warning-foreground;
+  }
+  
+  .alert-destructive {
+    @apply border-destructive/50 bg-destructive/10 text-destructive;
+  }
+  
+  .alert-success {
+    @apply border-success/50 bg-success/10 text-success;
+  }
+  
+  .alert-info {
+    @apply border-info/50 bg-info/10 text-info;
+  }
 }
 
 @theme {
@@ -99,6 +165,12 @@
   --color-accent-foreground: hsl(var(--accent-foreground));
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-info: hsl(var(--info));
+  --color-info-foreground: hsl(var(--info-foreground));
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));

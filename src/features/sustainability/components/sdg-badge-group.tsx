@@ -1,3 +1,8 @@
+"use client";
+
+import { motion } from 'framer-motion';
+import { fadeInUpVariants } from '@/lib/animations';
+
 interface SDGBadge {
   number: number;
   title: string;
@@ -22,36 +27,49 @@ const sdgs: SDGBadge[] = [
 
 export function SDGBadgeGroup() {
   return (
-    <div className="rounded-lg border border-border-dark bg-surface-dark p-6">
-      <h3 className="text-lg font-semibold text-white mb-4">UN Sustainable Development Goals</h3>
-      <p className="text-sm text-gray-400 mb-6">
+    <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
+      <h3 className="text-lg font-semibold text-foreground mb-4">UN Sustainable Development Goals</h3>
+      <p className="text-sm text-muted-foreground mb-6">
         We-Swap directly contributes to these global sustainability targets
       </p>
       
       <div className="grid gap-4 sm:grid-cols-2">
-        {sdgs.map((sdg) => (
-          <div 
+        {sdgs.map((sdg, index) => (
+          <motion.div 
             key={sdg.number}
-            className="rounded-lg border border-border-dark bg-canvas-dark p-4 hover:border-primary-mint/50 transition-colors"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.2, duration: 0.4 }}
+            whileHover={{ y: -4 }}
+            className="rounded-lg border border-border bg-background p-4 hover:shadow-md transition-all"
           >
             <div className="flex items-start gap-4">
-              <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg ${sdg.color} text-white font-bold text-lg`}>
+              <motion.div 
+                className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg ${sdg.color} text-white font-bold text-lg shadow-sm`}
+                whileHover={{ scale: 1.05, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
                 {sdg.number}
-              </div>
+              </motion.div>
               <div className="flex-1">
-                <h4 className="font-semibold text-white text-sm mb-1">{sdg.title}</h4>
-                <p className="text-xs text-gray-400">{sdg.description}</p>
+                <h4 className="font-semibold text-foreground text-sm mb-1">{sdg.title}</h4>
+                <p className="text-xs text-muted-foreground">{sdg.description}</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
       
-      <div className="mt-6 rounded-lg bg-primary-mint/10 border border-primary-mint/20 p-4">
-        <p className="text-sm text-primary-mint">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.5, duration: 0.4 }}
+        className="mt-6 rounded-lg bg-success/10 border border-success/30 p-4"
+      >
+        <p className="text-sm text-success-foreground">
           🌱 Every transaction on We-Swap helps build a more sustainable campus community
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

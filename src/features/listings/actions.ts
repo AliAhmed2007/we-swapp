@@ -76,11 +76,11 @@ export async function getListings(filters?: {
     .from('listings')
     .select(`
       *,
-      profiles (
+      profiles!listings_user_id_fkey (
         full_name,
         university_email
       ),
-      categories (
+      categories!listings_category_id_fkey (
         name,
         slug
       )
@@ -103,8 +103,13 @@ export async function getListings(filters?: {
   const { data, error } = await query;
 
   if (error) {
-    console.error('Error fetching listings:', error);
-    return { listings: [], error: error.message };
+    console.error('Error fetching listings:', {
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+      code: error.code
+    });
+    return { listings: [], error: error.message || 'Failed to fetch listings' };
   }
 
   return { listings: data || [], error: null };
@@ -117,12 +122,12 @@ export async function getListing(id: string) {
     .from('listings')
     .select(`
       *,
-      profiles (
+      profiles!listings_user_id_fkey (
         full_name,
         university_email,
         campus_location
       ),
-      categories (
+      categories!listings_category_id_fkey (
         name,
         slug
       )
@@ -131,8 +136,13 @@ export async function getListing(id: string) {
     .single();
 
   if (error) {
-    console.error('Error fetching listing:', error);
-    return { listing: null, error: error.message };
+    console.error('Error fetching listing:', {
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+      code: error.code
+    });
+    return { listing: null, error: error.message || 'Failed to fetch listing' };
   }
 
   return { listing: data, error: null };

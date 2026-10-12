@@ -1,4 +1,8 @@
+"use client";
+
+import { motion } from 'framer-motion';
 import { ListingCard } from './listing-card';
+import { staggerContainerVariants, fadeInUpVariants } from '@/lib/animations';
 import type { Database } from '@/types/database.types';
 
 type Listing = Database['public']['Tables']['listings']['Row'] & {
@@ -20,7 +24,12 @@ interface ListingGridProps {
 export function ListingGrid({ listings, emptyMessage = 'No listings found' }: ListingGridProps) {
   if (listings.length === 0) {
     return (
-      <div className="text-center py-16">
+      <motion.div 
+        className="text-center py-16"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
         <svg
           className="w-24 h-24 mx-auto mb-4 text-muted-foreground/30"
           fill="none"
@@ -36,15 +45,22 @@ export function ListingGrid({ listings, emptyMessage = 'No listings found' }: Li
         </svg>
         <h3 className="text-xl font-semibold mb-2">{emptyMessage}</h3>
         <p className="text-muted-foreground">Try adjusting your filters or check back later</p>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <motion.div 
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      variants={staggerContainerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {listings.map((listing) => (
-        <ListingCard key={listing.id} listing={listing} />
+        <motion.div key={listing.id} variants={fadeInUpVariants}>
+          <ListingCard listing={listing} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

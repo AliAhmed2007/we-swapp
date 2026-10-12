@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { springSnappy } from '@/lib/animations';
 import { sendMessage } from '../actions';
 
 interface Message {
@@ -64,7 +66,7 @@ export function ChatWindow({
   }
 
   return (
-    <div className="flex flex-col h-[600px] bg-card border-x border-b border-border rounded-b-lg">
+    <div className="flex flex-col h-[600px] bg-card border-x border-b border-border rounded-b-lg shadow-sm">
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 ? (
@@ -75,15 +77,18 @@ export function ChatWindow({
           messages.map((message) => {
             const isOwn = message.sender_id === currentUserId;
             return (
-              <div
+              <motion.div
                 key={message.id}
+                initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={springSnappy}
                 className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[70%] rounded-lg px-4 py-2 ${
+                  className={`max-w-[70%] rounded-lg px-4 py-2 shadow-sm ${
                     isOwn
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-foreground'
+                      ? 'bg-primary text-primary-foreground rounded-br-sm'
+                      : 'bg-muted text-foreground border border-border rounded-bl-sm'
                   }`}
                 >
                   {!isOwn && message.sender && (
@@ -101,7 +106,7 @@ export function ChatWindow({
                     }) : ''}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })
         )}
@@ -109,23 +114,25 @@ export function ChatWindow({
       </div>
 
       {/* Input */}
-      <form onSubmit={handleSend} className="border-t border-border p-4">
+      <form onSubmit={handleSend} className="border-t border-border p-4 bg-background">
         <div className="flex gap-2">
           <input
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type a message..."
-            className="flex-1 px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
+            className="flex-1 px-4 py-2 border border-border rounded-lg bg-card focus:outline-none focus:ring-2 focus:ring-ring"
             disabled={sending}
           />
-          <button
+          <motion.button
             type="submit"
             disabled={!newMessage.trim() || sending}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="px-6 py-2 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
           >
             {sending ? 'Sending...' : 'Send'}
-          </button>
+          </motion.button>
         </div>
       </form>
     </div>

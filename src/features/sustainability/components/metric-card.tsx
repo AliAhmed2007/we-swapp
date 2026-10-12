@@ -1,6 +1,6 @@
 interface MetricCardProps {
   title: string;
-  value: string | number;
+  value: string | number | React.ReactNode;
   unit: string;
   icon: React.ReactNode;
   description?: string;
@@ -8,19 +8,19 @@ interface MetricCardProps {
 
 export function MetricCard({ title, value, unit, icon, description }: MetricCardProps) {
   return (
-    <div className="rounded-lg border border-border-dark bg-surface-dark p-6">
+    <div className="rounded-lg border border-border bg-card p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-gray-400">{title}</p>
+          <p className="text-sm font-medium text-muted-foreground">{title}</p>
           <div className="mt-2 flex items-baseline gap-2">
-            <p className="text-3xl font-bold text-white">{value}</p>
-            <p className="text-lg font-medium text-gray-400">{unit}</p>
+            <p className="text-3xl font-bold text-foreground">{value}</p>
+            <p className="text-lg font-medium text-muted-foreground">{unit}</p>
           </div>
           {description && (
-            <p className="mt-2 text-sm text-gray-500">{description}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{description}</p>
           )}
         </div>
-        <div className="rounded-lg bg-primary-mint/10 p-3 text-primary-mint">
+        <div className="rounded-lg bg-primary/10 p-3 text-primary">
           {icon}
         </div>
       </div>
