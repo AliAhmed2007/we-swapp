@@ -9,7 +9,7 @@ export default async function BrowsePage({
   searchParams: { type?: string; category?: string; search?: string };
 }) {
   const { listings } = await getListings({
-    type: searchParams.type,
+    type: searchParams.type as 'SELL' | 'DONATE' | 'SWAP' | undefined,
     category: searchParams.category ? parseInt(searchParams.category) : undefined,
     search: searchParams.search,
   });

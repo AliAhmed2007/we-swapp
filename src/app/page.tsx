@@ -115,7 +115,7 @@ export default function Home() {
             Making Campus Sustainable, One Exchange at a Time
           </h2>
           <p className="text-lg opacity-90 mb-8">
-            Every item you reuse helps reduce waste and carbon emissions. Together, we're building a more sustainable future.
+            Every item you reuse helps reduce waste and carbon emissions. Together, we&apos;re building a more sustainable future.
           </p>
           <Link
             href={ROUTES.IMPACT}

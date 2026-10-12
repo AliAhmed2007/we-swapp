@@ -179,7 +179,7 @@ export function CreateListingForm() {
                 name="listing_type"
                 value={type.value}
                 checked={listingType === type.value}
-                onChange={(e) => setListingType(e.target.value as any)}
+                onChange={(e) => setListingType(e.target.value as 'SELL' | 'DONATE' | 'SWAP')}
                 className="sr-only"
               />
               <span className="text-3xl mb-2">{type.icon}</span>
