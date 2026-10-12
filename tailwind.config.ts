@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,70 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary Brand Colors
-        mint: {
-          DEFAULT: "#10D08A",
-          50: "#E6FBF4",
-          100: "#CCF7E9",
-          200: "#99EFD3",
-          300: "#66E7BD",
-          400: "#33DFA7",
-          500: "#10D08A",
-          600: "#0DA672",
-          700: "#0A7D59",
-          800: "#075341",
-          900: "#042A28",
-        },
-        emerald: {
-          DEFAULT: "#009F6B",
-          50: "#E6F7F1",
-          100: "#CCEFE3",
-          200: "#99DFC7",
-          300: "#66CFAB",
-          400: "#33BF8F",
-          500: "#009F6B",
-          600: "#008056",
-          700: "#006040",
-          800: "#00402B",
-          900: "#002015",
-        },
-        darkAccent: {
-          DEFAULT: "#0B4F3A",
-          50: "#E8F2EE",
-          100: "#D1E5DD",
-          200: "#A3CBBB",
-          300: "#75B199",
-          400: "#479777",
-          500: "#0B4F3A",
-          600: "#093F2E",
-          700: "#072F23",
-          800: "#052017",
-          900: "#02100C",
-        },
-        
-        // Canvas & Surface
-        canvas: {
-          dark: "#0D1117",
-          light: "#F8FAFC",
-        },
-        surface: {
-          dark: "#161B22",
-          light: "#FFFFFF",
-        },
-        border: {
-          dark: "#21262D",
-          light: "#E2E8F0",
-        },
-        
-        // Text Colors
-        text: {
-          slate: "#0F172A",
-          muted: "#64748B",
-          light: "#94A3B8",
-          dark: "#E2E8F0",
-        },
-        
-        // Shadcn/ui Compatibility
+        // Shadcn/ui CSS Variables (Primary)
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -87,6 +24,8 @@ const config: Config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          mint: "#10D08A",
+          emerald: "#009F6B",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

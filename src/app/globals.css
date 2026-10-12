@@ -4,56 +4,50 @@
 
 @layer base {
   :root {
-    /* Light Mode - Shadcn/ui Variables */
-    --background: 210 20% 98%; /* Canvas Light */
-    --foreground: 222 47% 11%; /* Text Slate */
+    /* Light Mode */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
     
-    --card: 0 0% 100%; /* Surface Light */
+    --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
     
-    --primary: 160 92% 45%; /* Primary Mint */
+    --primary: 160 92% 45%;
     --primary-foreground: 0 0% 100%;
     
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
     
     --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%; /* Text Muted */
+    --muted-foreground: 215 16% 47%;
     
-    --accent: 160 100% 31%; /* Primary Emerald */
+    --accent: 160 100% 31%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 214 32% 91%; /* Border Light */
+    --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 160 92% 45%;
     
     --radius: 0.5rem;
-    
-    --chart-1: 160 92% 45%;
-    --chart-2: 160 100% 31%;
-    --chart-3: 160 100% 23%;
-    --chart-4: 215 16% 47%;
-    --chart-5: 222 47% 11%;
   }
   
   .dark {
-    /* Dark Mode - Shadcn/ui Variables */
-    --background: 215 28% 7%; /* Canvas Dark */
+    /* Dark Mode */
+    --background: 215 28% 7%;
     --foreground: 210 40% 98%;
     
-    --card: 216 22% 11%; /* Surface Dark */
+    --card: 216 22% 11%;
     --card-foreground: 210 40% 98%;
     
     --popover: 216 22% 11%;
     --popover-foreground: 210 40% 98%;
     
-    --primary: 160 92% 45%; /* Primary Mint */
+    --primary: 160 92% 45%;
     --primary-foreground: 222 47% 11%;
     
     --secondary: 217 19% 27%;
@@ -62,128 +56,26 @@
     --muted: 217 19% 27%;
     --muted-foreground: 215 16% 47%;
     
-    --accent: 160 100% 31%; /* Primary Emerald */
+    --accent: 160 100% 31%;
     --accent-foreground: 210 40% 98%;
     
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
     
-    --border: 217 19% 18%; /* Border Dark */
+    --border: 217 19% 18%;
     --input: 217 19% 18%;
     --ring: 160 92% 45%;
-    
-    --chart-1: 160 92% 45%;
-    --chart-2: 160 100% 31%;
-    --chart-3: 160 100% 23%;
-    --chart-4: 215 16% 47%;
-    --chart-5: 210 40% 98%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
   }
   
   body {
-    @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
   
   html {
-    @apply antialiased;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-}
-
-@layer utilities {
-  /* Custom scrollbar styles */
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  
-  .scrollbar-thin::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-  
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-full;
-  }
-  
-  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/50;
-  }
-  
-  /* Focus visible styles */
-  .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
-  }
-  
-  /* Gradient text */
-  .text-gradient-mint {
-    @apply bg-gradient-to-r from-mint to-emerald bg-clip-text text-transparent;
-  }
-  
-  /* Container queries */
-  .container-responsive {
-    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
-  }
-  
-  /* Backdrop blur with fallback */
-  .backdrop-glass {
-    @apply backdrop-blur-md bg-background/80 supports-[backdrop-filter]:bg-background/60;
-  }
-  
-  /* Safe area insets for mobile */
-  .safe-top {
-    padding-top: env(safe-area-inset-top);
-  }
-  
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  
-  .safe-left {
-    padding-left: env(safe-area-inset-left);
-  }
-  
-  .safe-right {
-    padding-right: env(safe-area-inset-right);
-  }
-}
-
-/* Print styles */
-@media print {
-  body {
-    @apply bg-white text-black;
-  }
-  
-  .no-print {
-    display: none !important;
-  }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-    --border: 214 32% 70%;
-  }
-  
-  .dark {
-    --border: 217 19% 30%;
   }
 }

@@ -5,7 +5,7 @@
 
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
-import type { Database } from '@/types/supabase';
+import type { Database } from '@/types/database.types';
 
 /**
  * Update session in middleware
@@ -49,7 +49,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   // Protected routes that require authentication
-  const protectedPaths = ['/dashboard', '/listings/create', '/profile'];
+  const protectedPaths = ['/listings/create', '/profile', '/chat', '/admin'];
   const isProtectedPath = protectedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path)
   );
@@ -57,15 +57,15 @@ export async function updateSession(request: NextRequest) {
   // Redirect to login if accessing protected route without authentication
   if (!user && isProtectedPath) {
     const url = request.nextUrl.clone();
-    url.pathname = '/auth/login';
+    url.pathname = '/login';
     url.searchParams.set('redirectTo', request.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
 
-  // Redirect to dashboard if authenticated user tries to access auth pages
-  if (user && request.nextUrl.pathname.startsWith('/auth')) {
+  // Redirect to home if authenticated user tries to access auth pages
+  if (user && (request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/register'))) {
     const url = request.nextUrl.clone();
-    url.pathname = '/dashboard';
+    url.pathname = '/';
     return NextResponse.redirect(url);
   }
 
